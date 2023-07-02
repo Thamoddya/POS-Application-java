@@ -18,7 +18,9 @@ import validations.loggedUser;
  * @author thamo
  */
 public class Login extends javax.swing.JFrame {
-    public static String LoggedAcademicName ;
+
+    public static String LoggedAcademicName;
+
     /**
      * Creates new form Login
      */
@@ -187,7 +189,7 @@ public class Login extends javax.swing.JFrame {
                     LoggedAcademicName = academicData.getString("academicName");
                     this.setVisible(Boolean.FALSE);
                     mainScreen.setVisible(Boolean.TRUE);
-                    
+
                 } else {
                     JOptionPane.showMessageDialog(this, "Please Enter Correct Data", "Warnihng", JOptionPane.ERROR_MESSAGE);
                     jTextField1.putClientProperty("JComponent.outline", "error");
