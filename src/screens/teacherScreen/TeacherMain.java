@@ -15,7 +15,7 @@ import validations.teacherData;
  *
  * @author thamo
  */
-public class TeacherMain extends javax.swing.JFrame {
+public final class TeacherMain extends javax.swing.JFrame {
 
     /**
      * Creates new form TeacherMain

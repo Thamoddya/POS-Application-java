@@ -4,6 +4,7 @@
  */
 package screens;
 
+import screens.studentScreen.studentMain;
 import screens.teacherScreen.TeacherMain;
 import validations.loggedUser;
 
@@ -206,7 +207,9 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
+        studentMain  sm = new studentMain();
+        sm.setVisible(Boolean.TRUE);
+        this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
