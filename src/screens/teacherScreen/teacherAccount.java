@@ -4,19 +4,24 @@
  */
 package screens.teacherScreen;
 
+import java.sql.Date;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 import process.MySQL;
 
 /**
  *
  * @author thamo
  */
-public class teacherAccount extends javax.swing.JFrame {
+public final class teacherAccount extends javax.swing.JFrame {
 
     public static String teacherID;
 
@@ -28,15 +33,19 @@ public class teacherAccount extends javax.swing.JFrame {
         clearData();
         loadTeacherData();
         loadSubjects();
+        loadteacherSubject();
+        loadteacherPayment();
+        loadClasses();
     }
 
-    public void clearData() {
+    public final void clearData() {
         jTextField1.setText("");
         jTextField3.setText("");
         jTextField2.setText("");
     }
 
     public void loadTeacherData() {
+        jTextField1.setEditable(Boolean.FALSE);
         try {
             ResultSet teacherData = MySQL.execute("SELECT * FROM teacher WHERE tno = '" + teacherID + "'");
 
@@ -62,7 +71,33 @@ public class teacherAccount extends javax.swing.JFrame {
             jList1.setModel(subjectsModel);
 
         } catch (Exception e) {
-            System.out.println("Error in loading Subjecta");
+            System.out.println("Error in loading Subjects");
+        }
+    }
+
+    public void loadteacherSubject() {
+        try {
+            ResultSet teacherClassData = MySQL.execute("SELECT COUNT(teacher_tno) FROM class WHERE teacher_tno ='" + teacherID + "'");
+
+            if (teacherClassData.next()) {
+                jLabel10.setText("Taught Classes :- " + teacherClassData.getString("COUNT(teacher_tno)"));
+            }
+
+        } catch (SQLException ex) {
+            Logger.getLogger(teacherAccount.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    public void loadteacherPayment() {
+        try {
+
+            ResultSet teacherPaymentData = MySQL.execute("SELECT SUM(VALUE) FROM invoice WHERE teacher_tno ='" + teacherID + "'");
+
+            if (teacherPaymentData.next()) {
+                jLabel9.setText("INCOME :- " + teacherPaymentData.getString("SUM(value)"));
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(teacherAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -75,6 +110,7 @@ public class teacherAccount extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel8 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -92,6 +128,14 @@ public class teacherAccount extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         jComboBox1 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jButton4 = new javax.swing.JButton();
+
+        jLabel8.setText("jLabel8");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -149,15 +193,68 @@ public class teacherAccount extends javax.swing.JFrame {
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("SUBJECTS");
 
+        jButton3.setText("ASSIGN SUBJECT");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel9.setText("INCOME :-");
+
+        jLabel10.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel10.setText("Taught Classes :-");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CLASS ID", "DATE", "SUBJECT"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+        }
+
+        jButton4.setText("UPDATE DETAILS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE))
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 433, Short.MAX_VALUE))
+                            .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -167,6 +264,16 @@ public class teacherAccount extends javax.swing.JFrame {
                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(12, 12, 12)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -217,9 +324,9 @@ public class teacherAccount extends javax.swing.JFrame {
                         .addGap(18, 18, 18)
                         .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(31, 31, 31)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jTextField1))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2))
                         .addGap(7, 7, 7)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -267,7 +374,7 @@ public class teacherAccount extends javax.swing.JFrame {
         String selectedSubject = jList1.getSelectedValue();
 
         if (selectedSubject == null) {
-            JOptionPane.showMessageDialog(this, "Select a subject to unassign", "Warnihng", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Select a subject to unassign", "Warning", JOptionPane.WARNING_MESSAGE);
             jList1.putClientProperty("JComponent.outline", "Warning");
         } else {
             MySQL.execute("DELETE FROM subject_has_teacher WHERE teacher_tno = '" + teacherID + "' AND "
@@ -275,6 +382,70 @@ public class teacherAccount extends javax.swing.JFrame {
             loadTeacherData();
         }
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String subjectname = (String) jComboBox1.getSelectedItem();
+
+        try {
+            String selectQuery = "SELECT COUNT(*) FROM subject_has_teacher WHERE subject_subno = (SELECT subno FROM subject WHERE description = '" + subjectname + "') AND teacher_tno = '" + teacherID + "' ";
+            ResultSet resultSet = MySQL.execute(selectQuery);
+            resultSet.next();
+            int count = resultSet.getInt(1);
+
+            if (count == 0) {
+                MySQL.execute("INSERT INTO subject_has_teacher(subject_subno,teacher_tno) VALUES( (SELECT subno FROM subject WHERE description = '" + subjectname + "') ,'" + teacherID + "')");
+            } else {
+                JOptionPane.showMessageDialog(this, "Entry already exists", "Warnihng", JOptionPane.WARNING_MESSAGE);
+            }
+
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        loadTeacherData();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        String TeacherNewName = jTextField3.getText();
+        String TeacherNewAddress = jTextField2.getText();
+
+        if (TeacherNewName.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Empty Teacher New Name", "Warning", JOptionPane.WARNING_MESSAGE);
+            jTextField3.putClientProperty("JComponent.outline", "Warning");
+        } else if (TeacherNewAddress.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Empty Teacher New Adress", "Warning", JOptionPane.WARNING_MESSAGE);
+            jTextField2.putClientProperty("JComponent.outline", "Warning");
+        } else {
+            MySQL.execute("UPDATE teacher SET teacherName = '" + TeacherNewName + "', address = '" + TeacherNewAddress + "' WHERE tno = '" + teacherID + "'");
+            loadTeacherData();
+            JOptionPane.showMessageDialog(this, "Successfuly Updated", "Success", JOptionPane.INFORMATION_MESSAGE);
+        }
+    }//GEN-LAST:event_jButton4ActionPerformed
+
+    public void loadClasses() {
+        ResultSet getClassData = MySQL.execute("SELECT * FROM class INNER JOIN subject ON subject.subno = class.subject_subno WHERE teacher_tno = '" + teacherID + "' ");
+
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel.setRowCount(0);
+
+        try {
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy MMMM dd 'at' hh.mm a");
+
+            while (getClassData.next()) {
+                Vector<String> v = new Vector<>();
+                v.add(getClassData.getString("classno"));
+                String time = getClassData.getString("timeslot");
+                java.util.Date date = inputDateFormat.parse(time);
+                String formattedTime = outputDateFormat.format(date);
+                v.add(formattedTime);
+                v.add(getClassData.getString("description"));
+
+                tableModel.addRow(v);
+                jTable1.setModel(tableModel);
+            }
+        } catch (Exception e) {
+        }
+    }
 
     public void loadSubjects() {
         ResultSet subjects = MySQL.execute("SELECT * FROM subject");
@@ -289,18 +460,25 @@ public class teacherAccount extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JList<String> jList1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

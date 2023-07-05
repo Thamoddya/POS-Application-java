@@ -170,10 +170,10 @@ public class Login extends javax.swing.JFrame {
         String academicPassword = jTextField2.getText();
 
         if (academicID.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please Enter academic ID", "Warnihng", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please Enter academic ID", "Warning", JOptionPane.ERROR_MESSAGE);
             jTextField1.putClientProperty("JComponent.outline", "Warning");
         } else if (academicPassword.isEmpty()) {
-            JOptionPane.showMessageDialog(this, "Please Enter Your Password", "Warnihng", JOptionPane.ERROR_MESSAGE);
+            JOptionPane.showMessageDialog(this, "Please Enter Your Password", "Warning", JOptionPane.ERROR_MESSAGE);
             jTextField2.putClientProperty("JComponent.outline", "Warning");
         } else {
 
@@ -191,7 +191,7 @@ public class Login extends javax.swing.JFrame {
                     mainScreen.setVisible(Boolean.TRUE);
 
                 } else {
-                    JOptionPane.showMessageDialog(this, "Please Enter Correct Data", "Warnihng", JOptionPane.ERROR_MESSAGE);
+                    JOptionPane.showMessageDialog(this, "Please Enter Correct Data", "Warning", JOptionPane.ERROR_MESSAGE);
                     jTextField1.putClientProperty("JComponent.outline", "error");
                     jTextField2.putClientProperty("JComponent.outline", "error");
                 }

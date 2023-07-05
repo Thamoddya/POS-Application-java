@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="lib1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/dist/lib/flatlaf-3.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/mysql-connector-java-8.0.24.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/flatlaf-intellij-themes-3.1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/activation.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/lib/javax.mail.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

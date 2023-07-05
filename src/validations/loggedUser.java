@@ -9,6 +9,7 @@ package validations;
  * @author thamo
  */
 public class loggedUser {
+    
     private static String academicID;
     private static String academicName;
 
