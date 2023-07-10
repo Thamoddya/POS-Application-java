@@ -1,15 +1,16 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
 package screens.studentScreen;
-
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import process.MySQL;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import model.MySQL;
 
 /**
  *
@@ -17,7 +18,8 @@ import process.MySQL;
  */
 public final class studentAccount extends javax.swing.JFrame {
 
-    public static String studentID;
+    public static String studentID = "STD002";
+    private static String BatchName;
 
     /**
      * Creates new form studentAccount
@@ -25,7 +27,9 @@ public final class studentAccount extends javax.swing.JFrame {
     public studentAccount() {
         initComponents();
         loadStudentData();
-
+        jTextField1.setEnabled(Boolean.FALSE);
+        loadClasses();
+        loadBatch();
     }
 
     /**
@@ -48,6 +52,11 @@ public final class studentAccount extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         jTextField3 = new javax.swing.JTextField();
         jPanel3 = new javax.swing.JPanel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        jLabel9 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton3 = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
         jTextField4 = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -90,15 +99,62 @@ public final class studentAccount extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Student Name :-");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "CLASS ID", "DATE", "SUBJECT"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable1);
+
+        jLabel9.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("BATCH");
+
+        jButton3.setText("ASSIGN BATCH");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 462, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 555, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 242, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(25, 25, 25))
         );
 
         jLabel6.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
@@ -111,6 +167,11 @@ public final class studentAccount extends javax.swing.JFrame {
         jLabel8.setText("Student mobile :-");
 
         jButton2.setText("UPDATE DATA");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -155,7 +216,7 @@ public final class studentAccount extends javax.swing.JFrame {
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jTextField5)))))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -195,7 +256,7 @@ public final class studentAccount extends javax.swing.JFrame {
                             .addComponent(jDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(18, 18, 18)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                        .addContainerGap(60, Short.MAX_VALUE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,9 +280,82 @@ public final class studentAccount extends javax.swing.JFrame {
         this.setVisible(Boolean.FALSE);
     }//GEN-LAST:event_jButton1ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+
+        String name = jTextField3.getText();
+        String adress = jTextField2.getText();
+        String mobile = jTextField5.getText();
+        Date birthDate = jDateChooser1.getDate();
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+        String formattedDate = dateFormat.format(birthDate);
+
+        if (name.isEmpty() || adress.isBlank() || mobile.isBlank()) {
+            JOptionPane.showMessageDialog(this, "Please Fill All Details", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+
+            MySQL.execute("UPDATE student SET `name` = '" + name + "' , address = '" + adress + "' , dob = '" + formattedDate + "' ,mobile = '" + mobile + "' WHERE sno = '" + studentID + "' ");
+            loadStudentData();
+            JOptionPane.showMessageDialog(this, "Update Success", "success", JOptionPane.INFORMATION_MESSAGE);
+        }
+
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    public void loadBatch() {
+        ResultSet subjects = MySQL.execute("SELECT * FROM batch");
+        try {
+            while (subjects.next()) {
+                jComboBox1.addItem(subjects.getString("batchName"));
+            }
+        } catch (SQLException ex) {
+            System.out.println(ex);
+        }
+    }
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        String newBatchName = (String) jComboBox1.getSelectedItem();
+        if (newBatchName.equals(BatchName)) {
+            JOptionPane.showMessageDialog(this, "Batch Already Exists", "Warning", JOptionPane.ERROR_MESSAGE);
+        } else {
+            String query = "UPDATE student SET batch_batchID = (SELECT batchID FROM batch WHERE batchName = '" + newBatchName + "') WHERE sno = '" + studentID + "'";
+            MySQL.execute(query);
+            JOptionPane.showMessageDialog(this, "Success", "Success", JOptionPane.INFORMATION_MESSAGE);
+            loadStudentData();
+        }
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    public void loadClasses() {
+        ResultSet getClassData = MySQL.execute("SELECT * FROM attendance"
+                + " INNER JOIN class ON class.classno = attendance.class_classno "
+                + " INNER JOIN subject ON subject.subno = class.subject_subno "
+                + " INNER JOIN student ON student.sno = attendance.student_sno WHERE student_sno ='" + studentID + "' ");
+
+        DefaultTableModel tableModel = (DefaultTableModel) jTable1.getModel();
+        tableModel.setRowCount(0);
+
+        try {
+            SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy MMMM dd 'at' hh.mm a");
+
+            while (getClassData.next()) {
+                Vector<String> v = new Vector<>();
+                v.add(getClassData.getString("attendance.class_classno"));
+                String time = getClassData.getString("class.timeslot");
+                java.util.Date date = inputDateFormat.parse(time);
+                String formattedTime = outputDateFormat.format(date);
+                v.add(formattedTime);
+                v.add(getClassData.getString("subject.description"));
+
+                tableModel.addRow(v);
+                jTable1.setModel(tableModel);
+            }
+        } catch (SQLException | ParseException e) {
+            System.out.println(e);
+        }
+    }
 
     public void loadStudentData() {
+
         ResultSet studentData = MySQL.execute("SELECT * FROM student INNER JOIN batch ON batch.batchID = student.batch_batchID   WHERE student.sno = '" + studentID + "'");
+
         try {
             if (studentData.next()) {
                 jTextField1.setText(studentID);
@@ -231,16 +365,23 @@ public final class studentAccount extends javax.swing.JFrame {
                 jTextField5.setText(studentData.getString("mobile"));
                 java.util.Date dob = studentData.getDate("dob");
                 jDateChooser1.setDate(dob);
+                BatchName = studentData.getString("batchName");
             }
         } catch (SQLException ex) {
             Logger.getLogger(studentAccount.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
+    public static void main(String[] args) {
+        studentAccount sa = new studentAccount();
+        sa.setVisible(true);
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JComboBox<String> jComboBox1;
     private com.toedter.calendar.JDateChooser jDateChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -249,9 +390,12 @@ public final class studentAccount extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTextField jTextField3;

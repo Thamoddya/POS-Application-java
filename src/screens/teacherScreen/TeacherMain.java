@@ -7,7 +7,7 @@ package screens.teacherScreen;
 import java.sql.ResultSet;
 import java.util.Vector;
 import javax.swing.table.DefaultTableModel;
-import process.MySQL;
+import model.MySQL;
 import screens.MainPage;
 import validations.teacherData;
 

@@ -10,7 +10,7 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
-import process.MySQL;
+import model.MySQL;
 import validations.loggedUser;
 
 /**
@@ -189,7 +189,7 @@ public class Login extends javax.swing.JFrame {
                     LoggedAcademicName = academicData.getString("academicName");
                     this.setVisible(Boolean.FALSE);
                     mainScreen.setVisible(Boolean.TRUE);
-
+                   
                 } else {
                     JOptionPane.showMessageDialog(this, "Please Enter Correct Data", "Warning", JOptionPane.ERROR_MESSAGE);
                     jTextField1.putClientProperty("JComponent.outline", "error");
