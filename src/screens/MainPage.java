@@ -4,7 +4,10 @@
  */
 package screens;
 
+import screens.attendance.attendanceMain;
+import screens.classScreen.classMain;
 import screens.studentScreen.studentMain;
+import screens.subjectScreen.subjectMain;
 import screens.teacherScreen.TeacherMain;
 import validations.loggedUser;
 
@@ -116,6 +119,11 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton3.setText("ATTENDANCE");
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("PAYMENTS");
 
@@ -129,6 +137,11 @@ public class MainPage extends javax.swing.JFrame {
         jButton6.setText("CLASS ENROLMENT");
 
         jButton7.setText("SUBJECT");
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
 
         jButton8.setText("BATCH");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
@@ -224,8 +237,23 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-        // TODO add your handling code here:
+        classMain cm = new classMain();
+        cm.setVisible(Boolean.TRUE);
+        this.dispose();
     }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        attendanceMain attendance = new attendanceMain();
+        attendance.setVisible(Boolean.TRUE);
+        this.dispose();
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        subjectMain sm = new subjectMain();
+        sm.setVisible(Boolean.TRUE);
+        this.dispose();
+        
+    }//GEN-LAST:event_jButton7ActionPerformed
 
     /**
      * @param args the command line arguments

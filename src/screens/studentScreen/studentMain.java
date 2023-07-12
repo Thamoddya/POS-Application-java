@@ -12,11 +12,9 @@ import model.MySQL;
 import screens.MainPage;
 
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+
 public  class studentMain extends javax.swing.JFrame {
+    
 
     /**
      * Creates new form studentMain
@@ -212,6 +210,7 @@ public  class studentMain extends javax.swing.JFrame {
             DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
             tm.setRowCount(0);
             ResultSet resultSet = MySQL.execute(query);
+            
             while (resultSet.next()) {
                 Vector<String> v = new Vector<>();
                 v.add(resultSet.getString("sno"));

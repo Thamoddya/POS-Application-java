@@ -199,9 +199,6 @@ public class attendanceMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void markAttendance(String studentID, String classID, String status) {
-
-    }
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
 
@@ -258,7 +255,6 @@ public class attendanceMain extends javax.swing.JFrame {
         } catch (SQLException ex) {
             Logger.getLogger(attendanceMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

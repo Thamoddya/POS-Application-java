@@ -12,13 +12,9 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
 public final class studentAccount extends javax.swing.JFrame {
 
-    public static String studentID = "STD002";
+    public static String studentID;
     private static String BatchName;
 
     /**
@@ -292,7 +288,6 @@ public final class studentAccount extends javax.swing.JFrame {
         if (name.isEmpty() || adress.isBlank() || mobile.isBlank()) {
             JOptionPane.showMessageDialog(this, "Please Fill All Details", "Warning", JOptionPane.ERROR_MESSAGE);
         } else {
-
             MySQL.execute("UPDATE student SET `name` = '" + name + "' , address = '" + adress + "' , dob = '" + formattedDate + "' ,mobile = '" + mobile + "' WHERE sno = '" + studentID + "' ");
             loadStudentData();
             JOptionPane.showMessageDialog(this, "Update Success", "success", JOptionPane.INFORMATION_MESSAGE);
@@ -300,16 +295,17 @@ public final class studentAccount extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    public void loadBatch() {
-        ResultSet subjects = MySQL.execute("SELECT * FROM batch");
+    private void loadBatch() {
+        ResultSet batch = MySQL.execute("SELECT * FROM batch");
         try {
-            while (subjects.next()) {
-                jComboBox1.addItem(subjects.getString("batchName"));
+            while (batch.next()) {
+                jComboBox1.addItem(batch.getString("batchName"));
             }
         } catch (SQLException ex) {
             System.out.println(ex);
         }
     }
+
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         String newBatchName = (String) jComboBox1.getSelectedItem();
         if (newBatchName.equals(BatchName)) {
