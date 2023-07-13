@@ -14,7 +14,7 @@ import model.MySQL;
 
 public final class studentAccount extends javax.swing.JFrame {
 
-    public static String studentID;
+    public static String studentID = "STD001";
     private static String BatchName;
 
     /**
@@ -281,6 +281,7 @@ public final class studentAccount extends javax.swing.JFrame {
         String name = jTextField3.getText();
         String adress = jTextField2.getText();
         String mobile = jTextField5.getText();
+        
         Date birthDate = jDateChooser1.getDate();
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         String formattedDate = dateFormat.format(birthDate);
@@ -328,10 +329,12 @@ public final class studentAccount extends javax.swing.JFrame {
         tableModel.setRowCount(0);
 
         try {
+            
             SimpleDateFormat inputDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             SimpleDateFormat outputDateFormat = new SimpleDateFormat("yyyy MMMM dd 'at' hh.mm a");
 
             while (getClassData.next()) {
+                
                 Vector<String> v = new Vector<>();
                 v.add(getClassData.getString("attendance.class_classno"));
                 String time = getClassData.getString("class.timeslot");

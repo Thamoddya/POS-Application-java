@@ -4,7 +4,6 @@
  */
 package screens.classScreen;
 
-import java.sql.Date;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
@@ -15,7 +14,6 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import model.MySQL;
 import screens.MainPage;
-import screens.studentScreen.studentAccount;
 import screens.teacherScreen.teacherAccount;
 
 public final class classMain extends javax.swing.JFrame {
@@ -250,7 +248,6 @@ public final class classMain extends javax.swing.JFrame {
     public void loadTable() {
 
         DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
-
         try {
             ResultSet classTable = MySQL.execute("SELECT * FROM class INNER JOIN subject ON subject.subno = class.subject_subno INNER JOIN teacher ON teacher.tno = class.teacher_tno WHERE class.status = '1' ");
             tm.setRowCount(0);
@@ -264,7 +261,7 @@ public final class classMain extends javax.swing.JFrame {
                 v.add(classTable.getString("teacherName"));
                 tm.addRow(v);
             }
-        } catch (Exception e) {
+        } catch (SQLException e) {
             System.out.println(e);
         }
     }
@@ -273,34 +270,9 @@ public final class classMain extends javax.swing.JFrame {
      * @param args the command line arguments
      */
     public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(classMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(classMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(classMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(classMain.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                new classMain().setVisible(true);
-            }
+        java.awt.EventQueue.invokeLater(() -> {
+            new classMain().setVisible(true);
         });
     }
 

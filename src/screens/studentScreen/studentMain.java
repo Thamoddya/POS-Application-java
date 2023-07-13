@@ -13,7 +13,7 @@ import screens.MainPage;
 
 
 
-public  class studentMain extends javax.swing.JFrame {
+public final  class studentMain extends javax.swing.JFrame {
     
 
     /**
@@ -204,7 +204,7 @@ public  class studentMain extends javax.swing.JFrame {
 
     private void jComboBox1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox1ActionPerformed
         String selectedBatchName = (String) jComboBox1.getSelectedItem();
-        String query = "SELECT * FROM student INNER JOIN batch ON batch.batchID = student.batch_batchID WHERE batch.batchName = '" + selectedBatchName + "' ";
+        String query = "SELECT * FROM student WHERE batch_batchID = (SELECT batchID FROM batch WHERE batchName = '"+selectedBatchName+"' ) ";
 
         try {
             DefaultTableModel tm = (DefaultTableModel) jTable1.getModel();
@@ -224,9 +224,6 @@ public  class studentMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jComboBox1ActionPerformed
 
-    private void loadTable(ResultSet tableData) {
-
-    }
 
     /**
      * @param args the command line arguments

@@ -5,6 +5,8 @@
 package screens;
 
 import screens.attendance.attendanceMain;
+import screens.batch.batchMain;
+import screens.classScreen.classEnrol;
 import screens.classScreen.classMain;
 import screens.studentScreen.studentMain;
 import screens.subjectScreen.subjectMain;
@@ -135,6 +137,11 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton6.setText("CLASS ENROLMENT");
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setText("SUBJECT");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
@@ -220,7 +227,7 @@ public class MainPage extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        studentMain  sm = new studentMain();
+        studentMain sm = new studentMain();
         sm.setVisible(Boolean.TRUE);
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -233,7 +240,9 @@ public class MainPage extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-        // TODO add your handling code here:
+        batchMain bm = new batchMain();
+        bm.setVisible(Boolean.TRUE);
+        this.dispose();
     }//GEN-LAST:event_jButton8ActionPerformed
 
     private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
@@ -252,8 +261,14 @@ public class MainPage extends javax.swing.JFrame {
         subjectMain sm = new subjectMain();
         sm.setVisible(Boolean.TRUE);
         this.dispose();
-        
+
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        classEnrol ce = new classEnrol();
+        ce.setVisible(Boolean.TRUE);
+        this.dispose();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
