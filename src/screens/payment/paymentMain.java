@@ -1,7 +1,6 @@
 package screens.payment;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
+
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.time.LocalDate;
@@ -72,7 +71,6 @@ public final class paymentMain extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel5 = new javax.swing.JLabel();
-        jButton3 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -143,13 +141,6 @@ public final class paymentMain extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         jLabel5.setText("Student Mobile");
 
-        jButton3.setText("Test");
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -184,9 +175,7 @@ public final class paymentMain extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 548, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 46, Short.MAX_VALUE)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jButton3))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(40, 40, 40))))
         );
         layout.setVerticalGroup(
@@ -220,9 +209,7 @@ public final class paymentMain extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton3)
-                        .addGap(110, 110, 110))))
+                        .addGap(141, 141, 141))))
         );
 
         pack();
@@ -305,30 +292,6 @@ public final class paymentMain extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-
-        try {
-            HashMap<String, Object> parameters = new HashMap<>();
-            parameters.put("studentname", "Test Data");
-            parameters.put("batchname", "Test Data");
-            parameters.put("address", "Test Data");
-            parameters.put("subjectname", "Test Data");
-            parameters.put("teachername", "Test Data");
-            parameters.put("price", "Test Data");
-            parameters.put("teachername", "Test Data");
-            parameters.put("price", "Test Data");
-            parameters.put("type", "Test Data");
-            parameters.put("moth", "Test Data");
-
-            JREmptyDataSource datasource = new JREmptyDataSource();
-            JasperPrint report = JasperFillManager.fillReport("src/reports/invoice.jasper", parameters, datasource);
-            JasperViewer.viewReport(report, false);
-
-        } catch (JRException e) {
-            System.out.println(e);
-        }
-    }//GEN-LAST:event_jButton3ActionPerformed
-
     private void loadTable(String mobile) {
 
         String query = "SELECT * FROM `invoice` "
@@ -361,7 +324,6 @@ public final class paymentMain extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
     private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JComboBox<String> jComboBox2;
     private javax.swing.JComboBox<String> jComboBox3;

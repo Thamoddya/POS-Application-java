@@ -4,6 +4,7 @@
  */
 package screens;
 
+import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatGitHubDarkContrastIJTheme;
 import com.formdev.flatlaf.intellijthemes.materialthemeuilite.FlatMoonlightContrastIJTheme;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -206,7 +207,7 @@ public class Login extends javax.swing.JFrame {
      */
     public static void main(String args[]) {
         /* Set the Nimbus look and feel */
-        FlatMoonlightContrastIJTheme.setup();
+        FlatGitHubDarkContrastIJTheme.setup();
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(() -> {

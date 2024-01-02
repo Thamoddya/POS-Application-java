@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
- */
+
 package screens.attendance;
 
 import java.awt.Color;
@@ -16,10 +13,7 @@ import model.MySQL;
 import screens.MainPage;
 import screens.studentScreen.studentAccount;
 
-/**
- *
- * @author Sammy Guergachi <sguergachi at gmail.com>
- */
+
 public class attendanceMain extends javax.swing.JFrame {
 
     private static String studentID;

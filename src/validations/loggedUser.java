@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
+
 package validations;
 
 /**
@@ -13,6 +10,9 @@ public class loggedUser {
     private static String academicID;
     private static String academicName;
 
+    public loggedUser(){
+        
+    }
     /**
      * @return the academicID
      */
@@ -40,6 +40,4 @@ public class loggedUser {
     public void setAcademicName(String academicName) {
         this.academicName = academicName;
     }
-    
-    
 }

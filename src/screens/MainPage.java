@@ -8,6 +8,7 @@ import screens.attendance.attendanceMain;
 import screens.batch.batchMain;
 import screens.classScreen.classEnrol;
 import screens.classScreen.classMain;
+import screens.payment.paymentMain;
 import screens.studentScreen.studentMain;
 import screens.subjectScreen.subjectMain;
 import screens.teacherScreen.TeacherMain;
@@ -128,6 +129,11 @@ public class MainPage extends javax.swing.JFrame {
         });
 
         jButton4.setText("PAYMENTS");
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton5.setText("TEACHER");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
@@ -269,6 +275,11 @@ public class MainPage extends javax.swing.JFrame {
         ce.setVisible(Boolean.TRUE);
         this.dispose();
     }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        new paymentMain().setVisible(Boolean.TRUE);
+        
+    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
